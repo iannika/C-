@@ -1,0 +1,47 @@
+//using System;
+
+public class M {
+static void Main(string[] args)
+{
+	var Bclass = new B();
+	for (int i = 0; i < 10; i++)
+	{
+		Console.Write("{0}", Bclass[i]);
+	}
+	Console.WriteLine();
+	
+	for (int i = 0; i < 10; i++)
+	{
+				Console.Write("{0}", Bclass[(short)i]);
+	}
+	Console.WriteLine();
+
+}
+}
+
+
+public class B
+{
+	int[] imyArray;
+	int[] imArray = new int[] {10, 15, 20, 25, 30, 35, 40, 45, 50, 55};
+	
+	public B()
+	{
+		imyArray = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	}
+	
+	public int this[int ind1]
+	{
+		get{return imyArray[ind1]; }
+		set{ imyArray[ind1] = value; }
+	}
+	
+	public int this[short ind2]
+	{
+		get{return imArray[ind2]; }
+		set{ imArray[ind2] = value; }
+	}
+}
+
+
+
