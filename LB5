@@ -7,11 +7,10 @@ class Program
 {
   static void Main(string[] args)
   {
-	  
-	  B myObject1 = new B(x: 4, y: 1);
-    B myObject2 = new B(x: 15, y: 3);
+    B c1 = new B(x: 15, y: 3);
+    B c2 = new B(x: 15, y: 3);
 
-    if(myObject1 == myObject2)
+    if(c1 == c2)
     {
       Console.WriteLine("Объекты равны");
     }
@@ -30,18 +29,18 @@ class B
   }
 
 
-  public static bool operator != (B obj1, B obj2)      // Перегружаем логический оператор true
+  public static bool operator != (B c1, B c2)      // Перегружаем логический оператор true
   {
-    if((obj1.x != obj2.x) || (obj1.y != obj2.y))
+    if((c1.x != c2.x) || (c1.y != c2.y))
     {
       return true;
     }
     return false;
   }
 
-  public static bool operator == (B obj1, B obj2)      // Перегружаем логический оператор false
+  public static bool operator == (B c1, B c2)      // Перегружаем логический оператор false
   {
-    if((obj1.x == obj2.x) && (obj1.y == obj2.y))
+    if((c1.x == c2.x) && (c1.y == c2.y))
     {
       return true;
     }
