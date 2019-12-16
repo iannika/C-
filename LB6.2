@@ -1,0 +1,117 @@
+    interface IGeometricFigure : IComparable
+    {
+        double Area{get;}
+        void Show();
+    }
+ 
+    class ArrayOfFigures: IEnumerable
+    {
+        IGeometricFigure[] geometricFigure;
+ 
+        public ArrayOfFigures(params IGeometricFigure[] gf)
+        {
+            geometricFigure = gf;
+        }
+        
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return geometricFigure.GetEnumerator();
+        }
+ 
+        public void SortArea()
+        {
+            Array.Sort(geometricFigure, new AreaComparer());
+        }
+ 
+        public void SortType()
+        {
+            Array.Sort(geometricFigure, new TypeComparer());
+        }        
+    }
+ 
+    class Circle:IGeometricFigure
+    {
+        double radius;
+        Color colour;
+        static TypeComparer TypeComparer = new TypeComparer();
+ 
+        public Circle(double r, Color c)
+        {
+            radius = r;
+            colour = c;
+        }
+ 
+        public double Area
+        {
+            get { return Math.PI*radius*radius; }
+        }
+ 
+        public override string ToString()
+        {
+            return "Круг с радиусом " + radius + "\r\nПлощадь круга равна " + Area + "\r\nЦвет круга - " + colour;
+        }
+ 
+        public void Show()
+        {
+            Console.WriteLine(ToString());
+        }
+ 
+        public int CompareTo(object obj)
+        {
+            return TypeComparer.Compare(this, obj);
+        }
+    }
+ 
+    class Square:IGeometricFigure
+    {
+        double side;
+        static TypeComparer TypeComparer = new TypeComparer();
+ 
+        public Square(int side)
+        {
+            this.side = side;
+        }
+ 
+        public double Perimeter()
+        {
+            return 4 * side;
+        }
+ 
+        public double Area
+        {
+            get { return side * side; }
+        }
+ 
+        public override string ToString()
+        {
+            return "Квадрат со стороной " + side + "\r\nПлощадь квадрата равна " + Area + "\r\nПериметр квадрата равен " + Perimeter();
+        }
+ 
+        public void Show()
+        {
+            Console.WriteLine(ToString());
+        }
+ 
+        public int CompareTo(object obj)
+        {
+            return TypeComparer.Compare(this, obj);
+        }        
+    }
+ 
+    class AreaComparer : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            IGeometricFigure a1 = x as IGeometricFigure;
+            IGeometricFigure a2 = y as IGeometricFigure;
+            return a1.Area.CompareTo(a2.Area);
+        }
+    }
+ 
+    class TypeComparer : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            return x.GetType().Name.CompareTo(y.GetType().Name);
+        }
+    }
