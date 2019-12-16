@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+class Program 
+{
+  static void Main(string[] args)
+  {
+	  
+	  B myObject1 = new B(x: 4, y: 1);
+    B myObject2 = new B(x: 15, y: 3);
+
+    if(myObject1 == myObject2)
+    {
+      Console.WriteLine("Объекты равны");
+    }
+    Console.ReadLine();
+  }
+}
+
+class B
+{
+  public int x, y;
+
+  public B(int x = 0, int y = 0)
+  {
+    this.x = x;
+    this.y = y;
+  }
+
+
+  public static bool operator != (B obj1, B obj2)      // Перегружаем логический оператор true
+  {
+    if((obj1.x != obj2.x) || (obj1.y != obj2.y))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  public static bool operator == (B obj1, B obj2)      // Перегружаем логический оператор false
+  {
+    if((obj1.x == obj2.x) && (obj1.y == obj2.y))
+    {
+      return true;
+    }
+    return false;
+  }
+}
